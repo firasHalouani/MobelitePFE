@@ -1,11 +1,14 @@
-FROM python:3.10-slim
+FROM python:3.10-alpine
 
 WORKDIR /app
 
-RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
+# Minimal runtime dependency for database support (replaces postgresql-dev)
+RUN apk add --no-cache libpq
 
 COPY requirements.txt .
 
+# Standard upgrade and requirements installation
+# psycopg2-binary will install via musllinux wheels on Alpine
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel jaraco.context>=6.1.0 && \
     pip install --no-cache-dir -r requirements.txt
 
