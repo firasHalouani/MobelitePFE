@@ -17,15 +17,14 @@ jobs:
         run: docker build -t invisithreat .
 
       - name: Download and Install Trivy
-        shell: powershell
+        shell: cmd
         run: |
-          $v = "0.50.1"
-          $url = "https://github.com/aquasecurity/trivy/releases/download/v$v/trivy_${v}_Windows-64bit.zip"
-          Invoke-WebRequest -Uri $url -OutFile trivy.zip
-          Expand-Archive -Path trivy.zip -DestinationPath ./trivy_bin -Force
-          Remove-Item trivy.zip
+          curl -L https://github.com/aquasecurity/trivy/releases/download/v0.50.1/trivy_0.50.1_Windows-64bit.zip -o trivy.zip
+          mkdir trivy_bin
+          tar -xf trivy.zip -C trivy_bin
+          del trivy.zip
 
       - name: Scan Docker image with Trivy
-        shell: powershell
+        shell: cmd
         run: |
-          ./trivy_bin/trivy.exe image --severity CRITICAL,HIGH --exit-code 1 invisithreat
+          trivy_bin\trivy.exe image --severity CRITICAL,HIGH --exit-code 1 invisithreat
