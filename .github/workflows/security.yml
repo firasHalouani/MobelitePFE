@@ -9,7 +9,7 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     defaults:
       run:
-        shell: bash
+        shell: cmd
 
     steps:
       - name: Checkout code
