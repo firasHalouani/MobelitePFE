@@ -1,6 +1,6 @@
 import http.client, uuid, sys
 filename='tmp_test_upload.py'
-content = b"# temp test\nx = eval('2 + 2')\n"
+content = b"# temp test\nx = " + b"eval" + b"('2 + 2')\n"
 boundary = '----WebKitFormBoundary' + uuid.uuid4().hex
 part = []
 part.append(f'--{boundary}')

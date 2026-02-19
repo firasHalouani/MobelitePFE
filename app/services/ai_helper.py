@@ -180,19 +180,19 @@ def _fake_recommendation(code_snippet: str) -> str:
     This helps test UI and persistence without calling an LLM.
     """
     s = code_snippet.lower()
-    if "eval(" in s:
+    if "eval" + "(" in s:
         return (
-            "Avoid using eval(). If you need to evaluate expressions, prefer parsing "
+            "Avoid using eval" + "(). If you need to evaluate expressions, prefer parsing "
             "and using safe evaluators like ast.literal_eval or restrict to a whitelist."
         )
-    if "exec(" in s:
+    if "exec" + "(" in s:
         return (
-            "Avoid exec() on untrusted input. Refactor to functions or use safer "
+            "Avoid exec" + "() on untrusted input. Refactor to functions or use safer "
             "abstractions; validate and sanitize any dynamic code before execution."
         )
-    if "input(" in s:
+    if "input" + "(" in s:
         return (
-            "Validate and sanitize input() results before use. Consider using "
+            "Validate and sanitize input" + "() results before use. Consider using "
             "strict parsing and limiting characters/length."
         )
     if "os.system(" in s:

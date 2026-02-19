@@ -5,6 +5,8 @@ def scan_project(folder_path: str):
     all_findings = []
 
     for root, dirs, files in os.walk(folder_path):
+        # Skip common non-project directories to avoid false positives and speed up scan
+        dirs[:] = [d for d in dirs if d not in (".git", "venv", "__pycache__", "node_modules")]
         for file in files:
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
