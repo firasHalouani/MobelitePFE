@@ -1,4 +1,4 @@
-name: InvisiThreat DevSecOps Pipeline
+name: InvisiThreat DevSecOps
 
 on:
   push:
